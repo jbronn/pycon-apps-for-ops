@@ -1,0 +1,8 @@
+# Debian-specific settings.
+---
+# Debian packages for setuptools/pip/virtualenv are extremeley
+# out-of-date on Debian -- set packages to false to bootstrap
+# with ez_setup / easy_install pip / pip install virtualenv.
+python::setuptools::package: false
+python::pip::package: false
+python::virtualenv::package: false

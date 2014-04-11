@@ -1,0 +1,10 @@
+# Example Hiera configuration file.
+---
+:backends:
+  - yaml
+:yaml:
+  :datadir: /vagrant/hiera
+:hierarchy:
+  - "%{::fqdn}"
+  - "%{::osfamily}"
+  - common

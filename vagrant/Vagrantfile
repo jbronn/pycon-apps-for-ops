@@ -1,0 +1,44 @@
+Vagrant.configure('2') do |config|
+  # The base box to use -- by default this is Ubuntu 12.04 (precise64).
+  # This box was generated with Packer using my `packer-vagrant` repository:
+  #  https://github.com/jbronn/packer-vagrant
+  config.vm.box = "precise64"
+  config.vm.box_url = "https://dl.dropboxusercontent.com/s/6mlzdfiw6qby36q/precise64.box"
+
+  # Set hostname for the box.
+  config.vm.hostname = "pyapp.local"
+
+  # Forward HTTP to 8000 on localhost.
+  config.vm.network :forwarded_port, guest: 80, host: 8000
+
+  # Customize any of the virtual hardware settings here.
+  config.vm.provider "virtualbox" do |vb|
+    vb.gui = false
+    vb.customize ["modifyvm", :id, "--cpus", 1]
+    vb.customize ["modifyvm", :id, "--memory", 512]
+  end
+
+  # Update apt lists to latest versions.
+  config.vm.provision "shell", path: "shell/apt-update.sh"
+
+  # Install Puppet modules into `modules`.
+  config.vm.provision "shell", path: "shell/puppet-modules.sh"
+
+  # Provision with puppet once complete with initial shell provisioners.
+  config.vm.provision "puppet" do |puppet|
+    # Fact to let Puppet know we're in Vagrant.
+    puppet.facter = {
+      "vagrant" => "1",
+    }
+
+    # Hiera configuration.
+    puppet.hiera_config_path = "hiera.yaml"
+
+    # Ensure that parent directory is in module path (so that `pyapp`
+    # can be found).
+    puppet.module_path = ["../", "modules"]
+
+    # Set verbose output for puppet, add "--debug" if you want even more.
+    puppet.options = "--verbose"
+  end
+end
