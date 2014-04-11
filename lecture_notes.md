@@ -63,6 +63,8 @@ Installing Modules
 
 Browse and search for modules at: https://forge.puppetlabs.com
 
+Build your own private Forge mirror with: https://github.com/jbronn/django-forge
+
 Module Structure
 ----------------
 
@@ -90,7 +92,7 @@ If set, the `owner` parameter is used by `venv_package` when installing packages
 Running Puppet
 --------------
 
-I'm really glancing over the Puppetmaster setup -- there are all sorts of wonderful things like PuppetDB (and exported/virtual resources) and custom `puppet:///` file shares that I'm not talking about.
+I'm really glancing over the Puppetmaster setup -- there are all sorts of wonderful things like PuppetDB (and exported/virtual resources) and custom `puppet:///` file shares that I'm not talking about.  The screen shot is from [puppetboard](https://github.com/nedap/puppetboard), a Flask web app that talks to PuppetDB.
 
 
 Puppet Development
