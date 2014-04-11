@@ -1,0 +1,17 @@
+description "pyapp"
+
+start on [2345]
+stop on runlevel [016]
+
+respawn
+console log
+
+setuid <%= @user %>
+setgid <%= @group %>
+
+chdir <%= @venv %>
+<% @pyapp_env.each do |env| -%>
+env <%= env %>
+<% end -%>
+
+exec <%= @venv %>/bin/gunicorn --bind <%= @gunicorn_bind %> pyapp.wsgi:application
