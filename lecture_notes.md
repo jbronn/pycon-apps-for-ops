@@ -90,4 +90,16 @@ If set, the `owner` parameter is used by `venv_package` when installing packages
 Running Puppet
 --------------
 
-I'm really glancing over the Puppetmaster setup.
+I'm really glancing over the Puppetmaster setup -- there are all sorts of wonderful things like PuppetDB (and exported/virtual resources) and custom `puppet:///` file shares that I'm not talking about.
+
+
+Puppet Development
+------------------
+
+### Vagrant
+
+I was initially so repulsed by Vagrant's innards and the `Vagrantfile` that I wanted to make something myself.  It's *really* hard, and I'm willing to overlook some of the ugliness because of the enormous benefits that Vagrant brings to the table.  Moreover, Vagrant has critical mass and network effects now -- use some of your Pythonista pragmatism and deal with it.
+
+### Testing Puppet
+
+Testing DevOps environments is *hard*, hence why I'm mostly just covering using Vagrant.  While [rspec-puppet](http://rspec-puppet.com/) has been generally accepted, it's coverage is quite limited.  The community is moving so quick, that I hadn't settled on a fully-automated solution by the time of this talk. The most promising thing is [beaker](https://github.com/puppetlabs/beaker), which uses Vagrant on the back end.  The focus on Vagrant is thus warranted.
